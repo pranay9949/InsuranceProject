@@ -39,4 +39,25 @@ public class GlobalExceptionHandler {
         mp.put("Message",ex.getMessage());
         return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ValidEmailException.class)
+    public ResponseEntity<Map<String,String>> handleEmailError(ValidEmailException ex){
+        Map<String,String> mp = new HashMap<>();
+        mp.put("Error Message",ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
+
+    }
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<Map<String ,String>> handleErrorEmail(InvalidPasswordException ex){
+        Map<String,String> mp = new HashMap<>();
+        mp.put("Error Message",ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoWorkerFoundException.class)
+    public ResponseEntity<Map<String ,String>> handleErrorEmail(NoWorkerFoundException ex){
+        Map<String,String> mp = new HashMap<>();
+        mp.put("Error Message",ex.getMessage());
+        return new ResponseEntity<>(mp, HttpStatus.BAD_REQUEST);
+    }
 }

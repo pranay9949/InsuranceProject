@@ -31,5 +31,4 @@ public interface PlanService {
     public Boolean planStatusChange(Long id,String Status) throws PlanNotFoundException;
 
 
-
 }
