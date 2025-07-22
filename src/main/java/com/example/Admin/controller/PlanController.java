@@ -106,4 +106,10 @@ public class PlanController {
 
     }
 
+    @GetMapping("/getByCategoryId/{id}")
+    public ResponseEntity<List<PlanResponse>> getByCatId(@PathVariable Long id) throws PlanNotFoundException {
+        List<PlanResponse> planResponse = planService.getByCategoryId(id);
+        return new ResponseEntity<>(planResponse,HttpStatus.OK);
+    }
+
 }

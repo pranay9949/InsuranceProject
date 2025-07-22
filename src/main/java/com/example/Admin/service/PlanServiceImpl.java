@@ -60,7 +60,7 @@ public class PlanServiceImpl implements PlanService {
 
       for(Plan p : plans){
           PlanResponse res = new PlanResponse();
-          PlanCategory category = planCategoryRepo.findById(p.getPlanId()).get();
+          PlanCategory category = planCategoryRepo.findById(p.getPlanCategoryId()).get();
           BeanUtils.copyProperties(p,res);
           res.setPlanCategoryName(category.getCategoryName());
           listRes.add(res);
@@ -144,6 +144,28 @@ public class PlanServiceImpl implements PlanService {
         plan.setPlanStatus(Status);
         planRepo.save(plan);
         return true;
+
+    }
+
+    @Override
+    public List<PlanResponse> getByCategoryId(Long id) throws PlanNotFoundException {
+        List<Plan> p = planRepo.findByPlanCategoryId(id);
+        if(p==null){
+            throw   new PlanNotFoundException("Please Enter Valid Category Id");
+        }
+        List<PlanResponse> planResponse = new ArrayList<>();
+        PlanCategory category = planCategoryRepo.findById(id).get();
+        p.stream().forEach(plan->{
+            PlanResponse res = new PlanResponse();
+            BeanUtils.copyProperties(plan,res);
+            res.setPlanCategoryName(category.getCategoryName());
+            planResponse.add(res);
+        });
+
+
+
+        return planResponse;
+
 
     }
 
